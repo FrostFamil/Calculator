@@ -20,7 +20,6 @@ class ViewController: UIViewController {
         //What should happen when a non-number button is pressed
         isFinishedTypingNumber = true
         
-        //for percentage button
         guard let number = Double(displayLabel.text!) else {
             fatalError("Error converting to Double")
         }
@@ -49,6 +48,19 @@ class ViewController: UIViewController {
                 displayLabel.text = numValue
                 isFinishedTypingNumber = false
             }else {
+                
+                if numValue == "." {
+                    guard let currentDisplayValue = Double(displayLabel.text!) else {
+                        fatalError("Cannot convert to double")
+                    }
+                    
+                    let isInt = floor(currentDisplayValue) == currentDisplayValue
+                    
+                    if !isInt {
+                        return
+                    }
+                }
+                
                 displayLabel.text = displayLabel.text! + numValue
             }
         }
